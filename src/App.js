@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {Route, Switch, useHistory, useLocation, Redirect} from 'react-router-dom';
 import ChartContainer from './ChartContainer/ChartContainer';
+import Monitoring from './Monitoring/Monitoring';
 import * as owen from './owenAxios';
+import Settings from './Settings/Settings';
 import * as actions from './store/actions/index';
-import Customization from './Сustomization/Customization';
-import DashBoard from './Сustomization/DashBoard/DashBoard';
 import Login from './Login/Login';
 import NavBar from './UI/NavBar';
 import {deleteLogin} from './shared/commonFunction';
@@ -76,10 +76,10 @@ const App = props => {
                         <ChartContainer/>
                     </Route>
                     <Route path="/dashboard" exact>
-                        <DashBoard/>
+                        <Monitoring/>
                     </Route>
                     <Route path="/parameters" exact>
-                        <Customization/>
+                        <Settings/>
                     </Route>
                     <Route path="*">
                         <Redirect to="/"/>

@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import {connect} from 'react-redux';
 import ChartContainer from '../ChartContainer/ChartContainer';
 import * as actions from '../store/actions';
-import DashBoard from './DashBoard/DashBoard';
+import DashBoard from './Dashboard/Dashboard';
 import DeviceList from './DeviceList/DeviceList';
 import {Button, Grid, Container, makeStyles} from '@material-ui/core';
 
@@ -25,7 +25,7 @@ const useStyle = makeStyles({
 });
 
 
-const Customization = (props) => {
+const Settings = (props) => {
         const {category, parameters, isChanged} = props;
         const refProps = useRef({category, parameters, isChanged});
 
@@ -71,4 +71,4 @@ const mapDispatchToProps = (dispatch) => ({
     saveConfigurationToServer: (config) => dispatch(actions.saveConfiguration(config)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Customization);
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);

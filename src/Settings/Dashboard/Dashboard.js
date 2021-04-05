@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const DashBoard = props => {
+const Dashboard = props => {
     const classes = useStyles();
 
     const onDragEnd = (result) => {
@@ -86,4 +86,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

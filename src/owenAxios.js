@@ -6,7 +6,7 @@ const owenAxios = axios.create({
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
     }
-});
+})
 
 export const getToken = (login, password) => {
     return owenAxios.post('/v1/auth/open', {
@@ -17,27 +17,27 @@ export const getToken = (login, password) => {
             saveLogin(login, password);
             setToken(resp.data.token);
         });
-};
+}
 
 export const getDeviceList = () => {
     return owenAxios.post('/v1/device/index', {});
-};
+}
 
 export const getValuesForParameters = (parameters) => {
     return owenAxios.post('/v1/parameters/last-data', {ids: parameters.map(param => param.id)});
-};
+}
 
 export const getDeviceDescriptions = (id) => {
     return owenAxios.post(`/v1/device/${id}`, {});
-};
+}
 
 export const deleteToken = () => {
     owenAxios.defaults.headers.common['Authorization'] = '';
-};
+}
 
 export const setToken = (token) => {
     owenAxios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-};
+}
 
 export async function getValuesForChart() {
     const date = new Date();
@@ -74,5 +74,5 @@ export const setInterceptor = () => {
             return Promise.reject(error);
         }
     );
-};
+}
 

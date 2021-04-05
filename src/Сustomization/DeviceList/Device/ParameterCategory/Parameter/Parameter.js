@@ -1,12 +1,9 @@
-/* eslint-disable react/prop-types */
-import DeleteIcon from '@material-ui/icons/Delete';
 import React from 'react';
 import {
     ListItem,
     ListItemIcon,
     Checkbox,
     ListItemText,
-    ListItemSecondaryAction,
     makeStyles,
     Typography, IconButton
 } from '@material-ui/core';

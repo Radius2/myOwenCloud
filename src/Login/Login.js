@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Container, makeStyles, TextField } from "@material-ui/core";
-import axios from "axios";
 
 const style = makeStyles(theme => ({
     paper: {

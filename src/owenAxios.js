@@ -39,12 +39,12 @@ export const setToken = (token) => {
     owenAxios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 }
 
-export async function getValuesForChart() {
+export async function getValuesForChart(ids) {
     const date = new Date();
     const startDate = new Date(date - (60 * 60 * 1000));
     return owenAxios.post(`/v1/parameters/data`,
         {
-            'ids': [6408738, 6408728],
+            'ids': ids,
             'start': formatDate(startDate),
             'end': formatDate(date),
             'step': 1

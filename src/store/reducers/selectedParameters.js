@@ -28,7 +28,7 @@ const deleteSelectedParameters = (state, value) => {
 const addSelectedParameters = (state, value) => {
     const newState = addCategory(state, value.ofDevice);
     const newParameters = [...state.parameters];
-    newParameters.push({id: value.id, name: value.name, categoryId: value.ofDevice.id});
+    newParameters.push({id: value.id, name: value.name, categoryId: value.ofDevice.id, value:value.value});
     return {...newState, isChanged: true, parameters: newParameters};
 };
 

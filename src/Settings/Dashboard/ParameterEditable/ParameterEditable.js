@@ -13,7 +13,7 @@ const useStyles = makeStyles({
         flexGrow: '1',
     },
     value: {
-        flexBasis: '72px',
+        flexBasis: '80px',
     },
     button: {
         marginLeft: '8px',
@@ -41,7 +41,7 @@ const Parameter = (props) => {
                     {...provided.dragHandleProps}>
                     <ListItemText className={classes.item} disableTypography>
                         <Typography className={classes.name}>{props.name}</Typography>
-                        <Typography variant='body1' align='right' className={classes.value}>{props.value}</Typography>
+                        <Typography noWrap variant='body1' align='right' className={classes.value}>{props.value}</Typography>
                         <IconButton variant='body1' size='small' onClick={props.click} className={classes.button}>
                             <DeleteIcon/>
                         </IconButton>

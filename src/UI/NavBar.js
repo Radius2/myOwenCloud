@@ -88,9 +88,7 @@ export default function PersistentDrawerLeft(props) {
     const location = useLocation();
 
     const classes = useStyles();
-    const theme = useTheme();
     const [open, setOpen] = React.useState(false);
-    const narrowSrceen = useMediaQuery(theme.breakpoints.down('xs'));
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -101,9 +99,7 @@ export default function PersistentDrawerLeft(props) {
     };
 
     const handlerLink = (link) => {
-       if (narrowSrceen) {
-           setOpen(false);
-       }
+        setOpen(false);
         history.push(link);
     };
 

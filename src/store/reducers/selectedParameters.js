@@ -22,13 +22,19 @@ const toggleSelectedParameters = (state, value) => {
 
 const deleteSelectedParameters = (state, value) => {
     const newParameters = state.parameters.filter(param => param.id !== value.id);
-    return {...state, isChanged: true, parameters: newParameters};
+    return cleanEmptyCategory({...state, isChanged: true, parameters: newParameters});
 };
 
 const addSelectedParameters = (state, value) => {
     const newState = addCategory(state, value.ofDevice);
     const newParameters = [...state.parameters];
-    newParameters.push({id: value.id, name: value.name, categoryId: value.ofDevice.id, value:value.value});
+    newParameters.push({
+        id: value.id,
+        name: value.name,
+        categoryId: value.ofDevice.id,
+        value: value.value,
+        inChart: value.in_graphs
+    });
     return {...newState, isChanged: true, parameters: newParameters};
 };
 
@@ -44,7 +50,7 @@ const sortSelectedParameters = (state, {from, to}) => {
     removed.categoryId = +to.droppableId;
     console.log(to.droppableId);
     newParameters.splice(to.index, 0, removed);
-    return {...state, isChanged: true, parameters: newParameters};
+    return cleanEmptyCategory({...state, isChanged: true, parameters: newParameters});
 };
 
 const addCategory = (state, value) => {
@@ -58,7 +64,20 @@ const addCategory = (state, value) => {
     return {...state, isChanged: true, category: newCategory};
 };
 
-const cleanSelectedParameters = () => {
+const cleanEmptyCategory = (state) => {
+    const {parameters, category} = state;
+    const cleanedCategories = category.filter(category => parameters.some(parameter => parameter.categoryId === category.id))
+    return {...state, isChanged: true, category: cleanedCategories}
+}
+
+const renameCategory = (state, value) => {
+    const {index, newName} = value;
+    const newCategories = [...state.category];
+    newCategories[index]= {...newCategories[index], name:newName};
+    return {...state, isChanged: true, category: newCategories}
+}
+
+const cleanState = () => {
     return initState;
 };
 
@@ -76,12 +95,14 @@ export default function reducer(state = initState, action) {
             return addValuesToSelectedParameters(state, action.value);
         case actionTypes.SET_NEW_CONFIGURATION:
             return setNewConfiguration(state, action.value);
-        case actionTypes.CLEAN_SELECTED_PARAMETERS:
-            return cleanSelectedParameters();
+        case actionTypes.CLEAN_STATE:
+            return cleanState();
         case actionTypes.SORT_SELECTED_PARAMETERS:
             return sortSelectedParameters(state, action.value);
         case  actionTypes.SAVE_CHANGED :
             return saveChanged(state);
+        case actionTypes.RENAME_CATEGORY:
+            return renameCategory(state, action.value);
         default :
             return state;
     }

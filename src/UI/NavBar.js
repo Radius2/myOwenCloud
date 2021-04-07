@@ -1,7 +1,6 @@
 import React from 'react';
-import {useHistory, useLocation} from 'react-router-dom';
 import clsx from 'clsx';
-import {makeStyles, useTheme} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -17,7 +16,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import BuildIcon from '@material-ui/icons/Build';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import {useLocation, useHistory} from 'react-router-dom'
+//import history from '../history';
 
 const drawerWidth = 240;
 
@@ -79,13 +79,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const links = [
-    {title: 'Dashboard', icon: <DashboardIcon/>, link: '/dashboard'},
-    {title: 'Parameters', icon: <BuildIcon/>, link: '/parameters'},
+    {title: 'Мониторинг', icon: <DashboardIcon/>, link: '/dashboard'},
+    {title: 'Настройка', icon: <BuildIcon/>, link: '/parameters'},
 ];
 
 export default function PersistentDrawerLeft(props) {
-    const history = useHistory();
     const location = useLocation();
+    const history = useHistory()
 
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
@@ -154,7 +154,7 @@ export default function PersistentDrawerLeft(props) {
                     <Divider/>
                     <ListItem button onClick={props.logout}>
                         <ListItemIcon> <ExitToAppIcon/> </ListItemIcon>
-                        <ListItemText primary={'Logout'}/>
+                        <ListItemText primary={'Выход'}/>
                     </ListItem>
                 </List>
             </Drawer>

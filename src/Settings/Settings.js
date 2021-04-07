@@ -3,13 +3,13 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import React, {useEffect, useRef, useState} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../store/actions';
-import DashBoard from './Dashboard/Dashboard';
+import Preview from './Preview/Preview';
 import DeviceList from './DeviceList/DeviceList';
-import {BottomNavigation, BottomNavigationAction, Grid, Container, makeStyles, Hidden} from '@material-ui/core';
+import {BottomNavigation, BottomNavigationAction, Grid, Container, makeStyles, Hidden, Box} from '@material-ui/core';
 import ViewAgendaIcon from '@material-ui/icons/ViewAgenda';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
-const useStyle = makeStyles({
+const useStyle = makeStyles(theme => ({
     scrolled: {
         position: 'relative',
         maxHeight: props => `calc(100vh - ${props.appBar + props.bottomNavigation}px )`,
@@ -21,11 +21,13 @@ const useStyle = makeStyles({
         }
     },
     bottomNavigation: {
+        backgroundColor:'#fafafa' ,
         position: 'fixed',
         width: '100%',
-        bottom: '0'
-    }
-});
+        left: 0,
+        bottom: '0',
+    },
+}));
 
 
 const Settings = (props) => {
@@ -35,6 +37,7 @@ const Settings = (props) => {
         const refProps = useRef({category, parameters, isChanged});
 
         useEffect(() => {
+
                 refProps.current = {category, parameters, isChanged};
             },
             [category, parameters]);
@@ -52,7 +55,7 @@ const Settings = (props) => {
             []
         );
         const narrowScreen = useMediaQuery(theme.breakpoints.down('md'));
-        const bottomNavigation = narrowScreen ? 56 : 0;
+        const bottomNavigation = narrowScreen ? 60 : 0;
 
         const classes = useStyle({appBar: 64, bottomNavigation});
 
@@ -65,7 +68,7 @@ const Settings = (props) => {
                 </Hidden>
                 <Hidden smDown={value === 'select'}>
                     <Grid className={classes.scrolled} item xs={12} md>
-                        <DashBoard/>
+                        <Preview/>
                     </Grid>
                 </Hidden>
             </Grid>
@@ -76,8 +79,8 @@ const Settings = (props) => {
                                   }}
                                   showLabels
                                   className={classes.bottomNavigation}>
-                    <BottomNavigationAction label="Select" value="select" icon={<CheckBoxIcon/>}/>
-                    <BottomNavigationAction label="Preview" value="preview" icon={<ViewAgendaIcon/>}/>
+                    <BottomNavigationAction label="Выбор" value="select" icon={<CheckBoxIcon/>}/>
+                    <BottomNavigationAction label="Предпросмотр" value="preview" icon={<ViewAgendaIcon/>}/>
                 </BottomNavigation>
             </Hidden>
         </Container>;

@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {ListItem, ListItemText, makeStyles, Typography} from '@material-ui/core';
-import {useRouteMatch, useHistory, Link} from 'react-router-dom';
+import {useRouteMatch } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 const useStyles = makeStyles(theme=>({
     container: {},
@@ -27,9 +28,9 @@ const useStyles = makeStyles(theme=>({
 
 
 const MonitoringParameter = (props) => {
+    const history = useHistory();
     const classes = useStyles();
     const {path, url} = useRouteMatch()
-    const history = useHistory()
 
     const buttonHandler = () => {
         history.push(`${url}/chart/?ids[]=${props.id}`)

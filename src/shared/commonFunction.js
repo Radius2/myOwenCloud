@@ -38,5 +38,5 @@ export const deleteLogin = () => {
 export const formatDate = (date) => {
     const formatDate = [date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()].join('-');
     const formatHour = date.toLocaleTimeString('en-GB');
-    return `${formatDate} ${formatHour}GMT+5:00`;
+    return `${formatDate} ${formatHour}`;
 };

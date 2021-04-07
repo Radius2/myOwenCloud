@@ -6,7 +6,8 @@ export {
     sortSelectedParameters,
     getValues,
     saveConfiguration,
-    getConfiguration
+    getConfiguration,
+    renameCategory,
 } from './selectedParameters';
 
 export {

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import {formatDate, saveLogin} from './shared/commonFunction';
 
+
+
 const owenAxios = axios.create({
     baseURL: 'https://api.owencloud.ru',
     headers: {
@@ -9,6 +11,7 @@ const owenAxios = axios.create({
 })
 
 export const getToken = (login, password) => {
+    console.log('запрос токена')
     return owenAxios.post('/v1/auth/open', {
         login: login,
         password: password,
@@ -16,7 +19,8 @@ export const getToken = (login, password) => {
         .then(resp => {
             saveLogin(login, password);
             setToken(resp.data.token);
-        });
+        })
+;
 }
 
 export const getDeviceList = () => {
@@ -39,7 +43,7 @@ export const setToken = (token) => {
     owenAxios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 }
 
-export async function getValuesForChart(ids) {
+export function getValuesForChart(ids) {
     const date = new Date();
     const startDate = new Date(date - (60 * 60 * 1000));
     return owenAxios.post(`/v1/parameters/data`,

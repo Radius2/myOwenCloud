@@ -10,27 +10,25 @@ import Login from './Login/Login';
 import NavBar from './UI/NavBar';
 import {deleteLogin} from './shared/commonFunction';
 
+
 const DEMO = {
     login: 'demo@owen.ru',
     password: 'demo123'
 };
 
 const App = props => {
+    const history = useHistory();
+    const location = useLocation();
+
     const [auth, setAuth] = useState({
         login: '',
         password: '',
     });
 
-    const history = useHistory();
-    const location = useLocation();
-
     useEffect(() => {
         if (localStorage.getItem('login') && localStorage.getItem('password')) {
-            owen.getToken(localStorage.getItem('login'), localStorage.getItem('password'))
-                .then(() => {
-                    props.getDevices();
-                    props.getConfiguration();
-                });
+            console.log('запрос токена')
+            login(localStorage.getItem('login'), localStorage.getItem('password'))
         } else {
             history.push('/');
         }
@@ -51,6 +49,20 @@ const App = props => {
         }));
     };
 
+    const login = (login,password)=>{
+        return owen.getToken(login,password)
+            .then(()=>{
+                props.getDevices();
+                props.getConfiguration();
+                if (history.location.pathname ==='/'){
+                    history.push('/dashboard')
+                }
+            })
+            .catch(()=>{
+                history.push('/')
+            })
+    }
+
     const logout = () => {
         deleteLogin();
         owen.deleteToken();
@@ -66,8 +78,8 @@ const App = props => {
                     password={auth.password}
                     passwordChange={inputPasswordHandler}
                     loginChange={inputLoginHandler}
-                    tokenRequest={() => owen.getToken(auth.login, auth.password)}
-                    demoLogin={() => owen.getToken(DEMO.login, DEMO.password)}
+                    tokenRequest={() => login(auth.login, auth.password)}
+                    demoLogin={() => login(DEMO.login, DEMO.password)}
                 />
             </Route>
             <NavBar name={'Инженерные технологии'} logout={logout}>

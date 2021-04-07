@@ -52,8 +52,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, props) => {
     return {
         toggleParameter: (param) => dispatch(actions.toggleSelectedParameter({
-            id: param.id,
-            name: param.name,
+            ...param,
             value: `${param.value} ${param.measurement.title}`,
             ofDevice: props.device
         }))

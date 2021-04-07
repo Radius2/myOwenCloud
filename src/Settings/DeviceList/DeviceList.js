@@ -1,16 +1,16 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Device from './Device/Device';
+import {useHistory} from 'react-router-dom'
 
 const DeviceList = props => {
+    const history=useHistory();
     const {devices} = props;
-    const history = useHistory();
+
 
     const linkGoBack = () => {
         history.goBack();
     };
-
 
 
     return !devices

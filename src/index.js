@@ -7,7 +7,9 @@ import * as owen from './owenAxios';
 import store from './store/store';
 import {CssBaseline} from '@material-ui/core';
 
+
 owen.setInterceptor();
+
 
 ReactDOM.render(
     <Provider store={store}>

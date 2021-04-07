@@ -21,7 +21,7 @@ export const setNewConfiguration = (value) => ({
 });
 
 export const cleanSelectedParameters = () => ({
-    type: action.CLEAN_SELECTED_PARAMETERS,
+    type: action.CLEAN_STATE,
 });
 
 export const sortSelectedParameters = (from, to) => ({
@@ -37,6 +37,11 @@ export const addValuesToParameters = (values) => ({
 const saveChanged = () => ({
     type: action.SAVE_CHANGED,
 });
+
+export const renameCategory = ({index,newName})=>({
+    type: action.RENAME_CATEGORY,
+    value: {index,newName}
+})
 
 export const getValues = (parameters) => {
     return dispatch => {

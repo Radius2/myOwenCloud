@@ -2,8 +2,8 @@ import {Button, Container, Typography, makeStyles} from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import React, {useEffect, useState} from 'react';
 import {Chart} from 'react-charts';
-import {useLocation} from 'react-router-dom';
 import * as owen from '../owenAxios';
+import {useLocation} from 'react-router-dom'
 
 const useStyle = makeStyles(theme => ({
     root: {

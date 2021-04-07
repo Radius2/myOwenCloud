@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import {Route, Switch, useHistory, useLocation, Redirect} from 'react-router-dom';
+import {Route, Switch, useHistory, Redirect} from 'react-router-dom';
 import ChartContainer from './ChartContainer/ChartContainer';
 import Monitoring from './Monitoring/Monitoring';
 import * as owen from './owenAxios';
@@ -18,7 +18,6 @@ const DEMO = {
 
 const App = props => {
     const history = useHistory();
-    const location = useLocation();
 
     const [auth, setAuth] = useState({
         login: '',
@@ -49,16 +48,16 @@ const App = props => {
         }));
     };
 
-    const login = (login,password)=>{
-        return owen.getToken(login,password)
-            .then(()=>{
+    const login = (login, password) => {
+        return owen.getToken(login, password)
+            .then(() => {
                 props.getDevices();
                 props.getConfiguration();
-                if (history.location.pathname ==='/'){
+                if (history.location.pathname === '/') {
                     history.push('/dashboard')
                 }
             })
-            .catch(()=>{
+            .catch(() => {
                 history.push('/')
             })
     }
@@ -110,7 +109,7 @@ const mapDispatchToProps = dispatch => {
     return {
         getDevices: () => dispatch(actions.requestDevices()),
         getConfiguration: () => dispatch(actions.getConfiguration()),
-        cleanState: () => dispatch(actions.cleanSelectedParameters()),
+        cleanState: () => dispatch(actions.cleanState()),
     };
 };
 

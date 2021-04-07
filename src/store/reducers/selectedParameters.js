@@ -47,10 +47,18 @@ const addValuesToSelectedParameters = (state, value) => {
 const sortSelectedParameters = (state, {from, to}) => {
     const newParameters = [...state.parameters];
     const [removed] = newParameters.splice(from.index, 1);
+    const newIndex = (to.index > from.index && +from.droppableId !== +to.droppableId) ? to.index - 1 : to.index;
     removed.categoryId = +to.droppableId;
     console.log(to.droppableId);
-    newParameters.splice(to.index, 0, removed);
+    newParameters.splice(newIndex, 0, removed);
     return cleanEmptyCategory({...state, isChanged: true, parameters: newParameters});
+};
+
+const sortCategories = (state, {from, to}) => {
+    const newCategories = [...state.category];
+    const [removed] = newCategories.splice(from.index, 1);
+    newCategories.splice(to.index, 0, removed);
+    return cleanEmptyCategory({...state, isChanged: true, category: newCategories});
 };
 
 const addCategory = (state, value) => {
@@ -73,7 +81,7 @@ const cleanEmptyCategory = (state) => {
 const renameCategory = (state, value) => {
     const {index, newName} = value;
     const newCategories = [...state.category];
-    newCategories[index]= {...newCategories[index], name:newName};
+    newCategories[index] = {...newCategories[index], name: newName};
     return {...state, isChanged: true, category: newCategories}
 }
 
@@ -103,6 +111,8 @@ export default function reducer(state = initState, action) {
             return saveChanged(state);
         case actionTypes.RENAME_CATEGORY:
             return renameCategory(state, action.value);
+        case actionTypes.SORT_CATEGORIES:
+            return sortCategories(state, action.value)
         default :
             return state;
     }

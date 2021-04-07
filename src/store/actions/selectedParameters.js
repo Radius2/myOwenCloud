@@ -1,4 +1,3 @@
-import config from 'react-beautiful-dnd/src/state/auto-scroller/fluid-scroller/config';
 import * as owen from '../../owenAxios';
 import * as firebase from '../../firebaseAxios';
 import {formatTitleOfValue} from '../../shared/commonFunction';
@@ -20,7 +19,7 @@ export const setNewConfiguration = (value) => ({
     value: value
 });
 
-export const cleanSelectedParameters = () => ({
+export const cleanState = () => ({
     type: action.CLEAN_STATE,
 });
 
@@ -28,6 +27,12 @@ export const sortSelectedParameters = (from, to) => ({
     type: action.SORT_SELECTED_PARAMETERS,
     value: {from, to}
 });
+
+export const sortCategories = (from, to) => ({
+    type: action.SORT_CATEGORIES,
+    value: {from, to}
+});
+
 
 export const addValuesToParameters = (values) => ({
     type: action.ADD_VALUES_TO_SELECTED_PARAMETERS,
@@ -38,7 +43,7 @@ const saveChanged = () => ({
     type: action.SAVE_CHANGED,
 });
 
-export const renameCategory = ({index,newName})=>({
+export const renameCategory = (index,newName)=>({
     type: action.RENAME_CATEGORY,
     value: {index,newName}
 })

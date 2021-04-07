@@ -1,6 +1,6 @@
-import {Divider, List, ListItem, makeStyles, Paper, TextField} from '@material-ui/core';
+import {Divider, List, makeStyles, Paper, TextField} from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import React, {useState} from 'react';
+import React from 'react';
 import {Draggable, Droppable} from 'react-beautiful-dnd';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions';
@@ -33,7 +33,7 @@ const ListOfParameters = (props) => {
     const {category} = props;
     return (
         <Draggable draggableId={category.id.toString()} index={props.index}>
-            {(provided, snapshot) => (
+            {provided => (
                 <Paper key={category.id}
                        elevation={1}
                        className={classes.paper}
@@ -48,8 +48,9 @@ const ListOfParameters = (props) => {
                         </IconButton>
                     </div>
                     <Divider/>
-                    <Droppable droppableId={category.id.toString()}>
-                        {(provided, snapshot) => (
+                    <Droppable droppableId={category.id.toString()}
+                               type='parameters'>
+                        {provided => (
                             <List {...provided.droppableProps}
                                   ref={provided.innerRef}
                                   className={classes.list}>
@@ -85,7 +86,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
     return {
         deleteSelectedParameters: (id) => dispatch(actions.deleteSelectedParameter(id)),
-        renameList: (index, newName) => dispatch(actions.renameCategory({index, newName}))
+        renameList: (index, newName) => dispatch(actions.renameCategory(index, newName))
     };
 };
 

@@ -1,25 +1,25 @@
-import * as actionTypes from "../actions/actionType";
+import * as actionTypes from '../actions/actionType';
 
 const initOwenCloud = {
     devices: [
         {
-            id: "",
-            name: "",
-            last_dt: "",
+            id: '',
+            name: '',
+            last_dt: '',
             online: '',
             categories: [
                 {
-                    id: "",
-                    name: "",
+                    id: '',
+                    name: '',
                 },
             ],
             parameters: [
                 {
-                    id: "",
-                    name: "",
-                    value: "",
-                    title: "",
-                    category_id: "",
+                    id: '',
+                    name: '',
+                    value: '',
+                    title: '',
+                    category_id: '',
                 },
             ],
         },
@@ -48,6 +48,10 @@ const setDeviceWithDescription = (state, device) => {
 
 const deleteDevices = state => ({...state, devices: []});
 
+const cleanState = () => {
+    return initOwenCloud;
+};
+
 export default function owenCloudReducer(state = {}, action) {
     switch (action.type) {
         case actionTypes.SET_DEVICES:
@@ -56,6 +60,8 @@ export default function owenCloudReducer(state = {}, action) {
             return setDeviceWithDescription(state, action.value);
         case actionTypes.DELETE_DEVICES:
             return deleteDevices();
+        case actionTypes.CLEAN_STATE:
+            return cleanState();
         default:
             return state;
     }

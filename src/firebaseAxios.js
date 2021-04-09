@@ -6,12 +6,8 @@ const firebaseAxios = axios.create({
 
 const getLogin = () => localStorage.getItem('firebaseLogin');
 
-export const getConfiguration = () => {
-    return firebaseAxios.get(`/users/${getLogin()}.json`);
-};
+export const getConfiguration = () => firebaseAxios.get(`/users/${getLogin()}.json`);
 
-export const saveConfiguration = configuration => {
-    return firebaseAxios.put(`/users/${getLogin()}.json`,
-        configuration);
-};
+
+export const saveConfiguration = configuration => firebaseAxios.put(`/users/${getLogin()}.json`, configuration);
 

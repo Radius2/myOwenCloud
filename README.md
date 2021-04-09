@@ -1,9 +1,9 @@
 # myOwenCloud
 
-Проект создан под существующий back end (https://web.owencloud.ru/  https://api.owencloud.ru/).
+Проект создан под существующий back end [owencloud](https://web.owencloud.ru/),  [API](https://api.owencloud.ru/).
 Цель проекта дополнить создать визуализацию данных с объектов под требования заказчика.
 
-Используемый СТЕК:
+# Используемый СТЕК:
 - React
 - Redux
 - Material UI
